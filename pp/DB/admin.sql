@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21/11/2023 às 18:11
+-- Tempo de geração: 14-Dez-2023 às 22:07
 -- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.0.28
+-- versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `category`
+-- Estrutura da tabela `category`
 --
 
 CREATE TABLE `category` (
@@ -33,21 +33,18 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `category`
+-- Extraindo dados da tabela `category`
 --
 
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
-(1, 'faxineira'),
-(2, 'predeiro'),
-(4, 'confeitero'),
-(5, 'costureira'),
 (6, 'auxiliar'),
-(7, 'garçom');
+(8, 'desenho'),
+(9, 'dublagem');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `orders`
+-- Estrutura da tabela `orders`
 --
 
 CREATE TABLE `orders` (
@@ -63,7 +60,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `orders`
+-- Extraindo dados da tabela `orders`
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `delivered_to`, `phone_no`, `deliver_address`, `pay_method`, `pay_status`, `order_status`, `order_date`) VALUES
@@ -73,7 +70,7 @@ INSERT INTO `orders` (`order_id`, `user_id`, `delivered_to`, `phone_no`, `delive
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `product`
+-- Estrutura da tabela `product`
 --
 
 CREATE TABLE `product` (
@@ -87,17 +84,16 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `product`
+-- Extraindo dados da tabela `product`
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_desc`, `product_image`, `price`, `category_id`, `uploaded_date`) VALUES
-(12, 'ilil', 'portaria 484', './uploads/images.jpeg', 5, 2, '2023-11-21'),
-(13, 'jiji', 'diodoro', './uploads/download.jpeg', 99, 2, '2023-11-21');
+(14, 'serviço de desenho', 'faço um desenho de personagem ou paisagem para você', './uploads/lapis.png', 50, 8, '2023-12-14');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `product_size_variation`
+-- Estrutura da tabela `product_size_variation`
 --
 
 CREATE TABLE `product_size_variation` (
@@ -108,7 +104,7 @@ CREATE TABLE `product_size_variation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `product_size_variation`
+-- Extraindo dados da tabela `product_size_variation`
 --
 
 INSERT INTO `product_size_variation` (`variation_id`, `product_id`, `size_id`, `quantity_in_stock`) VALUES
@@ -124,7 +120,7 @@ INSERT INTO `product_size_variation` (`variation_id`, `product_id`, `size_id`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE `users` (
@@ -140,7 +136,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `users`
+-- Extraindo dados da tabela `users`
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `contact_no`, `registered_at`, `isAdmin`, `user_address`) VALUES
@@ -152,47 +148,47 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, 
 --
 
 --
--- Índices de tabela `category`
+-- Índices para tabela `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Índices de tabela `orders`
+-- Índices para tabela `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Índices de tabela `product`
+-- Índices para tabela `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `category_id` (`category_id`);
 
 --
--- Índices de tabela `product_size_variation`
+-- Índices para tabela `product_size_variation`
 --
 ALTER TABLE `product_size_variation`
   ADD PRIMARY KEY (`variation_id`),
   ADD UNIQUE KEY `uc_ps` (`product_id`,`size_id`);
 
 --
--- Índices de tabela `users`
+-- Índices para tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `orders`
@@ -204,7 +200,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT de tabela `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `product_size_variation`
@@ -219,17 +215,17 @@ ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `orders`
+-- Limitadores para a tabela `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Restrições para tabelas `product`
+-- Limitadores para a tabela `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
